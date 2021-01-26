@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="466" userLabel="PatchController" customClass="PatchController">
+            <connections>
+                <outlet property="barProgress" destination="487" id="489"/>
+                <outlet property="chkMakeBackup" destination="458" id="474"/>
+                <outlet property="patchBtn" destination="464" id="sKV-rn-vsM"/>
+                <outlet property="patchMenuItem" destination="c0u-eS-gmC" id="iS4-Yg-Y6I"/>
+                <outlet property="pnlPatching" destination="483" id="488"/>
+                <outlet property="txtRomPath" destination="454" id="473"/>
+                <outlet property="wndPatcher" destination="371" id="477"/>
+            </connections>
+        </customObject>
+        <menu title="AMainMenu" systemMenu="main" id="29" userLabel="MainMenu">
+            <items>
+                <menuItem title="Programme d’installation du patch MOTHER 3 VF" id="56">
+                    <menu key="submenu" title="Programme d’installation du patch MOTHER 3 VF" systemMenu="apple" id="57">
+                        <items>
+                            <menuItem title="À propos du Programme d’installation du patch MOTHER 3 VF" id="58">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="143">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Services" id="131">
+                                <menu key="submenu" title="Services" systemMenu="services" id="130"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="144">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Masquer le Programme d’installation du patch MOTHER 3 VF" keyEquivalent="h" id="134">
+                                <connections>
+                                    <action selector="hide:" target="-1" id="367"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Masquer les autres" keyEquivalent="h" id="145">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-1" id="368"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Tout afficher" id="150">
+                                <connections>
+                                    <action selector="unhideAllApplications:" target="-1" id="370"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="149">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Quitter le Programme d’installation du patch MOTHER 3 VF" keyEquivalent="q" id="136" userLabel="1111">
+                                <connections>
+                                    <action selector="terminate:" target="-3" id="449"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Fichier" id="wvG-OE-Z6R">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Fichier" autoenablesItems="NO" id="S3X-aW-45f">
+                        <items>
+                            <menuItem title="Ouvrir une ROM…" keyEquivalent="o" id="uzm-yi-bya">
+                                <connections>
+                                    <action selector="btnBrowse:" target="466" id="Z7f-uV-CzR"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Appliquer le patch" enabled="NO" keyEquivalent="r" id="c0u-eS-gmC">
+                                <connections>
+                                    <action selector="btnApply:" target="466" id="GWV-41-w5z"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Édition" id="qNq-hy-sH0">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Édition" id="kl1-nw-I6n">
+                        <items>
+                            <menuItem title="Copier" keyEquivalent="c" id="Acl-sa-y5D">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="YjK-Uu-hWn"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Tout sélectionner" keyEquivalent="a" id="tz8-bA-0rh">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="Wml-hn-aAO"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Fenêtre" id="19">
+                    <menu key="submenu" title="Fenêtre" systemMenu="window" id="24">
+                        <items>
+                            <menuItem title="Placer dans le Dock" keyEquivalent="m" id="23">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="37"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="92">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Tout ramener au premier plan" id="5">
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-1" id="39"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Aide" id="5pd-uh-uXF">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Aide" systemMenu="help" id="JEU-IV-jvC">
+                        <items>
+                            <menuItem title="Instructions d’installation" keyEquivalent="?" id="Jm4-6Y-SlO">
+                                <connections>
+                                    <action selector="seekHelp:" target="466" id="JoM-dP-hpp"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Nous contacter" id="OfM-bY-7yl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="seekHelpContact:" target="466" id="CIk-wv-LgS"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Demander de l’aide sur Discord" id="p1W-Tn-Q3r">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="seekHelpOnDiscord:" target="466" id="agb-d2-1TO"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="140" y="154"/>
+        </menu>
+        <window title="Installation du patch de traduction" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" texturedBackground="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="335" y="512" width="450" height="238"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="372">
+                <rect key="frame" x="0.0" y="0.0" width="450" height="238"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="450">
+                        <rect key="frame" x="20" y="113" width="410" height="105"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="patcher_logo" id="451"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="452">
+                        <rect key="frame" x="17" y="88" width="415" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Emplacement de la ROM japonaise :" id="453">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField toolTip="Emplacement de la rom japonaise" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="454">
+                        <rect key="frame" x="19" y="63" width="318" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="455">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <allowedInputSourceLocales>
+                                <string>ti_ER</string>
+                                <string>ar_LY</string>
+                                <string>kok_IN</string>
+                                <string>mk_MK</string>
+                                <string>eo</string>
+                                <string>fr_CH</string>
+                                <string>sw</string>
+                                <string>so_ET</string>
+                                <string>gv</string>
+                                <string>ar_BH</string>
+                                <string>hy_AM_REVISED</string>
+                                <string>it_IT</string>
+                                <string>bg_BG</string>
+                                <string>ro</string>
+                                <string>es_HN</string>
+                                <string>en_BE</string>
+                                <string>is</string>
+                                <string>kw_GB</string>
+                                <string>kl</string>
+                                <string>ga_IE</string>
+                                <string>nl_NL</string>
+                                <string>uk</string>
+                                <string>fr_CA</string>
+                                <string>sk_SK</string>
+                                <string>es_AR</string>
+                                <string>en_MT</string>
+                                <string>fr_BE</string>
+                                <string>ca</string>
+                                <string>cs_CZ</string>
+                                <string>fr_FR</string>
+                                <string>en_ZA</string>
+                                <string>sl</string>
+                                <string>fa</string>
+                                <string>so</string>
+                                <string>pt</string>
+                                <string>et_EE</string>
+                                <string>eu_ES</string>
+                                <string>fi</string>
+                                <string>de_CH</string>
+                                <string>or</string>
+                                <string>gu_IN</string>
+                                <string>mt_MT</string>
+                                <string>nb</string>
+                                <string>ms</string>
+                                <string>es_CR</string>
+                                <string>as_IN</string>
+                                <string>ar_SA</string>
+                                <string>am</string>
+                                <string>pl</string>
+                                <string>hu</string>
+                                <string>lv</string>
+                                <string>ar_DZ</string>
+                                <string>ur</string>
+                                <string>pt_PT</string>
+                                <string>eu</string>
+                                <string>so_DJ</string>
+                                <string>de</string>
+                                <string>en_IN</string>
+                                <string>hr_HR</string>
+                                <string>ar_AE</string>
+                                <string>gu</string>
+                                <string>lt</string>
+                                <string>te_IN</string>
+                                <string>ar_KW</string>
+                                <string>sr_Latn</string>
+                                <string>de_AT</string>
+                                <string>en_US</string>
+                                <string>es_PR</string>
+                                <string>pl_PL</string>
+                                <string>uz_Cyrl_UZ</string>
+                                <string>ar_EG</string>
+                                <string>it_CH</string>
+                                <string>nl</string>
+                                <string>haw_US</string>
+                                <string>is_IS</string>
+                                <string>en_IE</string>
+                                <string>kl_GL</string>
+                                <string>ps</string>
+                                <string>zh_Hans_CN</string>
+                                <string>ar</string>
+                                <string>ru_UA</string>
+                                <string>th_TH</string>
+                                <string>fr_LU</string>
+                                <string>uz_Latn_UZ</string>
+                                <string>az</string>
+                                <string>bn_IN</string>
+                                <string>es_MX</string>
+                                <string>kk_KZ</string>
+                                <string>en_US_POSIX</string>
+                                <string>el_GR</string>
+                                <string>he</string>
+                                <string>es_UY</string>
+                                <string>nn_NO</string>
+                                <string>sr</string>
+                                <string>sk</string>
+                                <string>ur_PK</string>
+                                <string>es_PA</string>
+                                <string>sv_FI</string>
+                                <string>zh</string>
+                                <string>es_DO</string>
+                                <string>en_CA</string>
+                                <string>en_BW</string>
+                                <string>de_DE</string>
+                                <string>haw</string>
+                                <string>pa_IN</string>
+                                <string>sq</string>
+                                <string>kw</string>
+                                <string>ga</string>
+                                <string>ml</string>
+                                <string>mt</string>
+                                <string>af_ZA</string>
+                                <string>az_Latn</string>
+                                <string>ko_KR</string>
+                                <string>fa_AF</string>
+                                <string>ps_AF</string>
+                                <string>be_BY</string>
+                                <string>bn</string>
+                                <string>it</string>
+                                <string>sr_Latn_CS</string>
+                                <string>zh_Hans</string>
+                                <string>as</string>
+                                <string>ms_MY</string>
+                                <string>be</string>
+                                <string>sl_SI</string>
+                                <string>fa_IR</string>
+                                <string>es_EC</string>
+                                <string>kok</string>
+                                <string>es_PY</string>
+                                <string>ta_IN</string>
+                                <string>am_ET</string>
+                                <string>es_CO</string>
+                                <string>uz_Latn</string>
+                                <string>el</string>
+                                <string>zh_Hant_MO</string>
+                                <string>kk</string>
+                                <string>kn</string>
+                                <string>zh_Hant</string>
+                                <string>en</string>
+                                <string>es_PE</string>
+                                <string>pt_BR</string>
+                                <string>ar_LB</string>
+                                <string>en_NZ</string>
+                                <string>es_ES</string>
+                                <string>en_HK</string>
+                                <string>es_BO</string>
+                                <string>hu_HU</string>
+                                <string>sr_Cyrl</string>
+                                <string>nb_NO</string>
+                                <string>sv</string>
+                                <string>vi</string>
+                                <string>ti_ET</string>
+                                <string>bg</string>
+                                <string>om</string>
+                                <string>de_LU</string>
+                                <string>en_SG</string>
+                                <string>id_ID</string>
+                                <string>ur_IN</string>
+                                <string>uz</string>
+                                <string>da</string>
+                                <string>ru_RU</string>
+                                <string>es_US</string>
+                                <string>es_VE</string>
+                                <string>ko</string>
+                                <string>ja</string>
+                                <string>af</string>
+                                <string>ar_YE</string>
+                                <string>lt_LT</string>
+                                <string>om_KE</string>
+                                <string>zh_Hans_SG</string>
+                                <string>es_NI</string>
+                                <string>he_IL</string>
+                                <string>en_PK</string>
+                                <string>en_PH</string>
+                                <string>az_Cyrl_AZ</string>
+                                <string>en_AU</string>
+                                <string>az_Cyrl</string>
+                                <string>ta</string>
+                                <string>ar_MA</string>
+                                <string>sw_KE</string>
+                                <string>tr_TR</string>
+                                <string>zh_Hant_HK</string>
+                                <string>en_ZW</string>
+                                <string>de_BE</string>
+                                <string>mk</string>
+                                <string>pa</string>
+                                <string>da_DK</string>
+                                <string>es_GT</string>
+                                <string>es</string>
+                                <string>ar_IQ</string>
+                                <string>az_Latn_AZ</string>
+                                <string>so_SO</string>
+                                <string>lv_LV</string>
+                                <string>mr</string>
+                                <string>te</string>
+                                <string>sq_AL</string>
+                                <string>ml_IN</string>
+                                <string>uk_UA</string>
+                                <string>hi_IN</string>
+                                <string>ca_ES</string>
+                                <string>ar_TN</string>
+                                <string>id</string>
+                                <string>om_ET</string>
+                                <string>cs</string>
+                                <string>fo_FO</string>
+                                <string>hy_AM</string>
+                                <string>en_GB</string>
+                                <string>sr_Cyrl_CS</string>
+                                <string>gl_ES</string>
+                                <string>sw_TZ</string>
+                                <string>ro_RO</string>
+                                <string>cy</string>
+                                <string>fr</string>
+                                <string>ms_BN</string>
+                                <string>so_KE</string>
+                                <string>tr</string>
+                                <string>gl</string>
+                                <string>cy_GB</string>
+                                <string>ar_OM</string>
+                                <string>fo</string>
+                                <string>es_CL</string>
+                                <string>sv_SE</string>
+                                <string>ar_JO</string>
+                                <string>uz_Cyrl</string>
+                                <string>zh_Hant_TW</string>
+                                <string>et</string>
+                                <string>hi</string>
+                                <string>fi_FI</string>
+                                <string>nn</string>
+                                <string>th</string>
+                                <string>ar_SY</string>
+                                <string>ja_JP</string>
+                                <string>gv_GB</string>
+                                <string>hy</string>
+                                <string>en_VI</string>
+                                <string>kn_IN</string>
+                                <string>ti</string>
+                                <string>ar_QA</string>
+                                <string>es_SV</string>
+                                <string>hr</string>
+                                <string>ru</string>
+                                <string>ar_SD</string>
+                                <string>mr_IN</string>
+                                <string>vi_VN</string>
+                                <string>nl_BE</string>
+                                <string>or_IN</string>
+                            </allowedInputSourceLocales>
+                        </textFieldCell>
+                        <accessibility description="Emplacement de la rom japonaise"/>
+                        <connections>
+                            <outlet property="delegate" destination="466" id="l9B-hC-Gwq"/>
+                        </connections>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="456">
+                        <rect key="frame" x="343" y="62" width="88" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="squareTextured" title="Parcourir…" bezelStyle="texturedSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="457">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <accessibility description="Parcourir"/>
+                        <connections>
+                            <action selector="btnBrowse:" target="466" id="475"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="458">
+                        <rect key="frame" x="17" y="39" width="259" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Garder une copie de la ROM d’origine" bezelStyle="regularSquare" imagePosition="left" alignment="left" imageScaling="proportionallyDown" inset="2" id="459">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <accessibility description="Garder une copie de la rom japonaise"/>
+                    </button>
+                    <button focusRingType="exterior" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="464">
+                        <rect key="frame" x="282" y="13" width="149" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="squareTextured" title="Appliquer le patch" bezelStyle="texturedSquare" alignment="center" enabled="NO" state="on" borderStyle="border" focusRingType="exterior" imageScaling="proportionallyDown" inset="2" id="465">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="btnApply:" target="466" id="476"/>
+                        </connections>
+                    </button>
+                    <imageView focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L5m-de-ExZ" customClass="DropImageView">
+                        <rect key="frame" x="20" y="63" width="410" height="155"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="none" alignment="left" imageScaling="proportionallyDown" id="ryY-5x-d73"/>
+                        <connections>
+                            <outlet property="patchController" destination="466" id="yIi-zI-KbS"/>
+                        </connections>
+                    </imageView>
+                    <button toolTip="Aide" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pf-9c-4Lc">
+                        <rect key="frame" x="6" y="3" width="25" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r1d-Ii-04H">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <accessibility description="Aide"/>
+                        <connections>
+                            <action selector="seekHelp:" target="466" id="7wy-bF-u1v"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <contentBorderThickness minY="0.0"/>
+            <point key="canvasLocation" x="140" y="-59"/>
+        </window>
+        <customObject id="420" customClass="NSFontManager"/>
+        <window title="Application du patch…" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="483" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="413" width="280" height="97"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="484">
+                <rect key="frame" x="0.0" y="0.0" width="280" height="97"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="485">
+                        <rect key="frame" x="17" y="60" width="246" height="17"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Application du patch…" id="486">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <progressIndicator verticalHuggingPriority="750" fixedFrame="YES" minValue="20" maxValue="100" doubleValue="20" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="487">
+                        <rect key="frame" x="18" y="32" width="244" height="20"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    </progressIndicator>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="114" y="215"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="patcher_logo" width="400" height="100"/>
+    </resources>
+</document>
