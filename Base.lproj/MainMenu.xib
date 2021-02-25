@@ -76,7 +76,10 @@
                                     <action selector="btnBrowse:" target="466" id="Z7f-uV-CzR"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Appliquer le patch" enabled="NO" keyEquivalent="r" id="c0u-eS-gmC">
+                            <menuItem title="Appliquer le patch" enabled="NO" id="c0u-eS-gmC">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 <connections>
                                     <action selector="btnApply:" target="466" id="GWV-41-w5z"/>
                                 </connections>
@@ -151,7 +154,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" texturedBackground="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="512" width="450" height="238"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="450" height="238"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -492,7 +495,7 @@
             <windowStyleMask key="styleMask" titled="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="413" width="280" height="97"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="484">
                 <rect key="frame" x="0.0" y="0.0" width="280" height="97"/>
                 <autoresizingMask key="autoresizingMask"/>

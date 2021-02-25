@@ -1,35 +1,31 @@
 #import "PatchController.h"
 #include "libups.hpp"
+#include <dlfcn.h>
 
 @implementation PatchController
 
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super viewDidLoad];
     [chkMakeBackup setKeyEquivalent:@"g"];
 }
 
 - (IBAction)btnApply:(id)sender {
-    NSLog(@"Apply");
-
+  
     NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSString *romPath = [txtRomPath stringValue]; //Path for the ROM, specified in the textfield
 	NSString *backupPath = [romPath stringByAppendingString:@".original"]; //A file that will be created
-    
-    //NSBundle *appResources = [NSBundle mainBundle]; //Get access to files inside the program
-	//NSString *appPath = [appResources bundlePath]; //
-	//NSRange lastSlash = [appPath rangeOfString:@"/" options:NSBackwardsSearch];
-	//NSString *appFolder = [appPath substringToIndex:lastSlash.location];
     
     if ([romPath length] == 0) { //User hasn’t specified the ROM path
         NSRunAlertPanel(@"Échec de l’installation",@"Vous n’avez pas spécifié l’emplacement de votre ROM japonaise !",@"OK",nil,nil);
         return;
     }
 
-    NSString* patchPath = [NSBundle.mainBundle.bundlePath stringByDeletingLastPathComponent];
-    patchPath = [patchPath stringByAppendingString:@"/mother3vf.ups"]; //Looking for the patch file at the same location as the app
+    NSString *appPath = NSBundle.mainBundle.bundlePath;
+    appPath = [self resolveTranslocatedPath: appPath];
+    appPath = [appPath stringByDeletingLastPathComponent];
     
+    NSString *patchPath = [appPath stringByAppendingString:@"/mother3vf.ups"]; //Looking for the patch file at the same location as the app
         
     if(![fileManager fileExistsAtPath:patchPath]) { //If the patch file is not find at this location...
         NSRange lastSlash = [romPath rangeOfString:@"/" options:NSBackwardsSearch];
@@ -38,7 +34,7 @@
     }
 
     while(![fileManager fileExistsAtPath:patchPath]) { //If it still can’t find the patch file...
-        int answer = NSRunAlertPanel(@"Programme d’installation du patch",@"Le fichier de patch (mother3vf.ups) est introuvable. Il devrait faire partie de l’archive Mother3VF que vous avez téléchargée.\nVoulez-vous spécifier l’emplacement de votre fichier de patch ?",@"Oui",@"Non",nil);
+        NSInteger answer = NSRunAlertPanel(@"Programme d’installation du patch",@"Le fichier de patch (mother3vf.ups) est introuvable. Il devrait faire partie de l’archive Mother3VF que vous avez téléchargée.\nVoulez-vous spécifier l’emplacement de votre fichier de patch ?",@"Oui",@"Non",nil);
 
         if (answer == NSAlertDefaultReturn) { //Ask for its location
             NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -88,7 +84,7 @@
                 [fileManager removeFileAtPath:backupPath handler:nil];
             }
             NSRunAlertPanel(@"Installation terminée !",@"La ROM a été patchée avec succès. Bon jeu !",@"Merci !",nil,nil);
-            [txtRomPath setStringValue:@""];
+            [self changeRomPath:@""];
 
         } else { //If failure...
             [fileManager removeFileAtPath:romPath handler:nil]; //Delete the aborted new rom file
@@ -140,6 +136,47 @@
     [self changeRomPath:filePath];
 }
 
+- (NSString *)resolveTranslocatedPath: (NSString *)path
+{
+    // macOS < 10.12
+    if (floor(NSAppKitVersionNumber) <= 1404) {
+        return path;
+    }
+
+    void *handle = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY);
+
+    if (handle == NULL) {
+        return path;
+    }
+
+    typedef Boolean (isTranslocatedFn)(CFURLRef, bool *, CFErrorRef * __nullable) ;
+    Boolean (*mySecTranslocateIsTranslocatedURL)(CFURLRef path, bool *isTranslocated, CFErrorRef * __nullable error);
+    mySecTranslocateIsTranslocatedURL = (isTranslocatedFn *) dlsym(handle, "SecTranslocateIsTranslocatedURL");
+
+    typedef CFURLRef __nullable (originalPathFn)(CFURLRef, CFErrorRef * __nullable) ;
+    CFURLRef __nullable (*mySecTranslocateCreateOriginalPathForURL)(CFURLRef translocatedPath, CFErrorRef * __nullable error);
+    mySecTranslocateCreateOriginalPathForURL = (originalPathFn *) dlsym(handle, "SecTranslocateCreateOriginalPathForURL");
+
+    if (mySecTranslocateIsTranslocatedURL == NULL || mySecTranslocateCreateOriginalPathForURL == NULL) {
+        return path;
+    }
+
+    bool isTranslocated = false;
+    CFURLRef pathURLRef = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, (__bridge CFStringRef)path, kCFURLPOSIXPathStyle, false);
+
+    if (mySecTranslocateIsTranslocatedURL(pathURLRef, &isTranslocated, NULL))
+    {
+        if (isTranslocated)
+        {
+            CFURLRef resolvedURL = mySecTranslocateCreateOriginalPathForURL(pathURLRef, NULL);
+            path = [(NSURL *)(resolvedURL) path];
+        }
+    }
+
+    CFRelease(pathURLRef);
+
+    return path;
+}
 
 
 @end
